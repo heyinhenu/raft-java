@@ -17,8 +17,7 @@ public class RaftFileUtils {
 
     private static final Logger LOG = LoggerFactory.getLogger(RaftFileUtils.class);
 
-    public static List<String> getSortedFilesInDirectory(
-            String dirName, String rootDirName) throws IOException {
+    public static List<String> getSortedFilesInDirectory(String dirName, String rootDirName) throws IOException {
         List<String> fileList = new ArrayList<>();
         File rootDir = new File(rootDirName);
         File dir = new File(dirName);
@@ -111,7 +110,7 @@ public class RaftFileUtils {
         }
     }
 
-    public static  <T extends GeneratedMessageV3> void writeProtoToFile(RandomAccessFile raf, T message) {
+    public static <T extends GeneratedMessageV3> void writeProtoToFile(RandomAccessFile raf, T message) {
         byte[] messageBytes = message.toByteArray();
         long crc32 = getCRC32(messageBytes);
         try {

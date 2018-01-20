@@ -45,15 +45,15 @@ public class ConcurrentClientMain {
             while (true) {
                 String key = UUID.randomUUID().toString();
                 String value = UUID.randomUUID().toString();
-                ExampleMessage.SetRequest setRequest = ExampleMessage.SetRequest.newBuilder()
-                        .setKey(key).setValue(value).build();
+                ExampleMessage.SetRequest setRequest = ExampleMessage.SetRequest.newBuilder().setKey(key).setValue(
+                        value).build();
 
                 long startTime = System.currentTimeMillis();
                 ExampleMessage.SetResponse setResponse = exampleService.set(setRequest);
                 try {
                     if (setResponse != null) {
-                        System.out.printf("set request, key=%s, value=%s, response=%s, elapseMS=%d\n",
-                                key, value, printer.print(setResponse), System.currentTimeMillis() - startTime);
+                        System.out.printf("set request, key=%s, value=%s, response=%s, elapseMS=%d\n", key, value,
+                                printer.print(setResponse), System.currentTimeMillis() - startTime);
                         readThreadPool.submit(new GetTask(exampleService, key));
                     } else {
                         System.out.printf("set request failed, key=%s value=%s\n", key, value);
@@ -76,14 +76,13 @@ public class ConcurrentClientMain {
 
         @Override
         public void run() {
-            ExampleMessage.GetRequest getRequest = ExampleMessage.GetRequest.newBuilder()
-                    .setKey(key).build();
+            ExampleMessage.GetRequest getRequest = ExampleMessage.GetRequest.newBuilder().setKey(key).build();
             long startTime = System.currentTimeMillis();
             ExampleMessage.GetResponse getResponse = exampleService.get(getRequest);
             try {
                 if (getResponse != null) {
-                    System.out.printf("get request, key=%s, response=%s, elapseMS=%d\n",
-                            key, printer.print(getResponse), System.currentTimeMillis() - startTime);
+                    System.out.printf("get request, key=%s, response=%s, elapseMS=%d\n", key,
+                            printer.print(getResponse), System.currentTimeMillis() - startTime);
                 } else {
                     System.out.printf("get request failed, key=%s\n", key);
                 }

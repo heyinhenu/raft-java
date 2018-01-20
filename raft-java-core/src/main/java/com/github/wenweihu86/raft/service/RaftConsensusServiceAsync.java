@@ -11,15 +11,12 @@ import java.util.concurrent.Future;
  */
 public interface RaftConsensusServiceAsync extends RaftConsensusService {
 
-    Future<RaftMessage.VoteResponse> requestVote(
-            RaftMessage.VoteRequest request,
+    Future<RaftMessage.VoteResponse> requestVote(RaftMessage.VoteRequest request,
             RPCCallback<RaftMessage.VoteResponse> callback);
 
-    Future<RaftMessage.AppendEntriesResponse> appendEntries(
-            RaftMessage.AppendEntriesRequest request,
+    Future<RaftMessage.AppendEntriesResponse> appendEntries(RaftMessage.AppendEntriesRequest request,
             RPCCallback<RaftMessage.AppendEntriesResponse> callback);
 
-    Future<RaftMessage.InstallSnapshotResponse> installSnapshot(
-            RaftMessage.InstallSnapshotRequest request,
+    Future<RaftMessage.InstallSnapshotResponse> installSnapshot(RaftMessage.InstallSnapshotRequest request,
             RPCCallback<RaftMessage.InstallSnapshotResponse> callback);
 }

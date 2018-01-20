@@ -14,6 +14,7 @@ public class Segment {
     public static class Record {
         public long offset;
         public RaftMessage.LogEntry entry;
+
         public Record(long offset, RaftMessage.LogEntry entry) {
             this.offset = offset;
             this.entry = entry;

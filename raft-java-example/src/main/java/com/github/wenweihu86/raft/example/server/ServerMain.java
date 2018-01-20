@@ -62,8 +62,7 @@ public class ServerMain {
         String host = splitServer[0];
         Integer port = Integer.parseInt(splitServer[1]);
         Integer serverId = Integer.parseInt(splitServer[2]);
-        RaftMessage.EndPoint endPoint = RaftMessage.EndPoint.newBuilder()
-                .setHost(host).setPort(port).build();
+        RaftMessage.EndPoint endPoint = RaftMessage.EndPoint.newBuilder().setHost(host).setPort(port).build();
         RaftMessage.Server.Builder serverBuilder = RaftMessage.Server.newBuilder();
         RaftMessage.Server server = serverBuilder.setServerId(serverId).setEndPoint(endPoint).build();
         return server;

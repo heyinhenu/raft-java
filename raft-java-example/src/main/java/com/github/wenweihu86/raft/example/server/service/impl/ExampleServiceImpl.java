@@ -48,8 +48,7 @@ public class ExampleServiceImpl implements ExampleService {
 
         ExampleMessage.SetResponse response = responseBuilder.build();
         try {
-            LOG.info("set request, request={}, response={}", printer.print(request),
-                    printer.print(response));
+            LOG.info("set request, request={}, response={}", printer.print(request), printer.print(response));
         } catch (InvalidProtocolBufferException ex) {
             ex.printStackTrace();
         }
@@ -60,8 +59,7 @@ public class ExampleServiceImpl implements ExampleService {
     public ExampleMessage.GetResponse get(ExampleMessage.GetRequest request) {
         ExampleMessage.GetResponse response = stateMachine.get(request);
         try {
-            LOG.info("get request, request={}, response={}", printer.print(request),
-                    printer.print(response));
+            LOG.info("get request, request={}, response={}", printer.print(request), printer.print(response));
         } catch (InvalidProtocolBufferException ex) {
             ex.printStackTrace();
         }

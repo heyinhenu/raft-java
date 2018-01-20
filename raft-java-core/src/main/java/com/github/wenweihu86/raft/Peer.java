@@ -24,9 +24,7 @@ public class Peer {
 
     public Peer(RaftMessage.Server server) {
         this.server = server;
-        this.rpcClient = new RPCClient(new EndPoint(
-                server.getEndPoint().getHost(),
-                server.getEndPoint().getPort()));
+        this.rpcClient = new RPCClient(new EndPoint(server.getEndPoint().getHost(), server.getEndPoint().getPort()));
         raftConsensusService = RPCProxy.getProxy(rpcClient, RaftConsensusService.class);
         raftConsensusServiceAsync = RPCProxy.getProxy(rpcClient, RaftConsensusServiceAsync.class);
         isCatchUp = false;

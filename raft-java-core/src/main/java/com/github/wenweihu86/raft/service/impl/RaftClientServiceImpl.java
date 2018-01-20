@@ -65,8 +65,7 @@ public class RaftClientServiceImpl implements RaftClientService {
 
     @Override
     public RaftMessage.GetConfigurationResponse getConfiguration(RaftMessage.GetConfigurationRequest request) {
-        RaftMessage.GetConfigurationResponse.Builder responseBuilder
-                = RaftMessage.GetConfigurationResponse.newBuilder();
+        RaftMessage.GetConfigurationResponse.Builder responseBuilder = RaftMessage.GetConfigurationResponse.newBuilder();
         responseBuilder.setResCode(RaftMessage.ResCode.RES_CODE_SUCCESS);
         raftNode.getLock().lock();
         try {
@@ -79,8 +78,7 @@ public class RaftClientServiceImpl implements RaftClientService {
         }
         RaftMessage.GetConfigurationResponse response = responseBuilder.build();
         try {
-            LOG.info("getConfiguration request={} response={}",
-                    PRINTER.print(request), PRINTER.print(response));
+            LOG.info("getConfiguration request={} response={}", PRINTER.print(request), PRINTER.print(response));
         } catch (InvalidProtocolBufferException ex) {
             ex.printStackTrace();
         }
@@ -92,8 +90,7 @@ public class RaftClientServiceImpl implements RaftClientService {
     public RaftMessage.AddPeersResponse addPeers(RaftMessage.AddPeersRequest request) {
         RaftMessage.AddPeersResponse.Builder responseBuilder = RaftMessage.AddPeersResponse.newBuilder();
         responseBuilder.setResCode(RaftMessage.ResCode.RES_CODE_FAIL);
-        if (request.getServersCount() == 0
-                || request.getServersCount() % 2 != 0) {
+        if (request.getServersCount() == 0 || request.getServersCount() % 2 != 0) {
             LOG.warn("added server's size can only multiple of 2");
             responseBuilder.setResMsg("added server's size can only multiple of 2");
             return responseBuilder.build();
@@ -147,8 +144,8 @@ public class RaftClientServiceImpl implements RaftClientService {
             byte[] configurationData;
             RaftMessage.Configuration newConfiguration;
             try {
-                newConfiguration = RaftMessage.Configuration.newBuilder(raftNode.getConfiguration())
-                        .addAllServers(request.getServersList()).build();
+                newConfiguration = RaftMessage.Configuration.newBuilder(raftNode.getConfiguration()).addAllServers(
+                        request.getServersList()).build();
                 configurationData = newConfiguration.toByteArray();
             } finally {
                 raftNode.getLock().unlock();
@@ -172,8 +169,7 @@ public class RaftClientServiceImpl implements RaftClientService {
 
         RaftMessage.AddPeersResponse response = responseBuilder.build();
         try {
-            LOG.info("addPeers request={} resCode={}",
-                    PRINTER.print(request), response.getResCode());
+            LOG.info("addPeers request={} resCode={}", PRINTER.print(request), response.getResCode());
         } catch (InvalidProtocolBufferException ex) {
             ex.printStackTrace();
         }
@@ -186,8 +182,7 @@ public class RaftClientServiceImpl implements RaftClientService {
         RaftMessage.RemovePeersResponse.Builder responseBuilder = RaftMessage.RemovePeersResponse.newBuilder();
         responseBuilder.setResCode(RaftMessage.ResCode.RES_CODE_FAIL);
 
-        if (request.getServersCount() == 0
-                || request.getServersCount() % 2 != 0) {
+        if (request.getServersCount() == 0 || request.getServersCount() % 2 != 0) {
             LOG.warn("removed server's size can only multiple of 2");
             responseBuilder.setResMsg("removed server's size can only multiple of 2");
             return responseBuilder.build();
@@ -209,8 +204,7 @@ public class RaftClientServiceImpl implements RaftClientService {
         RaftMessage.Configuration newConfiguration;
         byte[] configurationData;
         try {
-            newConfiguration = ConfigurationUtils.removeServers(
-                    raftNode.getConfiguration(), request.getServersList());
+            newConfiguration = ConfigurationUtils.removeServers(raftNode.getConfiguration(), request.getServersList());
             try {
                 LOG.debug("newConfiguration={}", PRINTER.print(newConfiguration));
             } catch (InvalidProtocolBufferException ex) {
@@ -226,8 +220,7 @@ public class RaftClientServiceImpl implements RaftClientService {
         }
 
         try {
-            LOG.info("removePeers request={} resCode={}",
-                    PRINTER.print(request), responseBuilder.getResCode());
+            LOG.info("removePeers request={} resCode={}", PRINTER.print(request), responseBuilder.getResCode());
         } catch (InvalidProtocolBufferException ex) {
             ex.printStackTrace();
         }

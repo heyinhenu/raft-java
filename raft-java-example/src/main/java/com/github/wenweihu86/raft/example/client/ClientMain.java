@@ -26,23 +26,20 @@ public class ClientMain {
 
         // set
         if (value != null) {
-            ExampleMessage.SetRequest setRequest = ExampleMessage.SetRequest.newBuilder()
-                    .setKey(key).setValue(value).build();
+            ExampleMessage.SetRequest setRequest = ExampleMessage.SetRequest.newBuilder().setKey(key).setValue(
+                    value).build();
             ExampleMessage.SetResponse setResponse = exampleService.set(setRequest);
             try {
-                System.out.printf("set request, key=%s value=%s response=%s\n",
-                        key, value, printer.print(setResponse));
+                System.out.printf("set request, key=%s value=%s response=%s\n", key, value, printer.print(setResponse));
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         } else {
             // get
-            ExampleMessage.GetRequest getRequest = ExampleMessage.GetRequest.newBuilder()
-                    .setKey(key).build();
+            ExampleMessage.GetRequest getRequest = ExampleMessage.GetRequest.newBuilder().setKey(key).build();
             ExampleMessage.GetResponse getResponse = exampleService.get(getRequest);
             try {
-                System.out.printf("get request, key=%s, response=%s\n",
-                        key, printer.print(getResponse));
+                System.out.printf("get request, key=%s, response=%s\n", key, printer.print(getResponse));
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

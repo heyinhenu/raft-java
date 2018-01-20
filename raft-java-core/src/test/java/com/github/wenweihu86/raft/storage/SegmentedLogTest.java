@@ -24,12 +24,9 @@ public class SegmentedLogTest {
 
         List<RaftMessage.LogEntry> entries = new ArrayList<>();
         for (int i = 1; i < 10; i++) {
-            RaftMessage.LogEntry entry = RaftMessage.LogEntry.newBuilder()
-                    .setData(ByteString.copyFrom(("testEntryData" + i).getBytes()))
-                    .setType(RaftMessage.EntryType.ENTRY_TYPE_DATA)
-                    .setIndex(i)
-                    .setTerm(i)
-                    .build();
+            RaftMessage.LogEntry entry = RaftMessage.LogEntry.newBuilder().setData(
+                    ByteString.copyFrom(("testEntryData" + i).getBytes())).setType(
+                    RaftMessage.EntryType.ENTRY_TYPE_DATA).setIndex(i).setTerm(i).build();
             entries.add(entry);
         }
         long lastLogIndex = segmentedLog.append(entries);

@@ -58,6 +58,7 @@ public class Snapshot {
     /**
      * 打开snapshot data目录下的文件，
      * 如果是软链接，需要打开实际文件句柄
+     *
      * @return 文件名以及文件句柄map
      */
     public TreeMap<String, SnapshotDataFile> openSnapshotDataFiles() {
@@ -96,8 +97,8 @@ public class Snapshot {
         String fileName = snapshotDir + File.separator + "metadata";
         File file = new File(fileName);
         try (RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r")) {
-            RaftMessage.SnapshotMetaData metadata = RaftFileUtils.readProtoFromFile(
-                    randomAccessFile, RaftMessage.SnapshotMetaData.class);
+            RaftMessage.SnapshotMetaData metadata = RaftFileUtils.readProtoFromFile(randomAccessFile,
+                    RaftMessage.SnapshotMetaData.class);
             return metadata;
         } catch (IOException ex) {
             LOG.warn("meta file not exist, name={}", fileName);
@@ -105,14 +106,10 @@ public class Snapshot {
         }
     }
 
-    public void updateMetaData(String dir,
-                               Long lastIncludedIndex,
-                               Long lastIncludedTerm,
-                               RaftMessage.Configuration configuration) {
-        RaftMessage.SnapshotMetaData snapshotMetaData = RaftMessage.SnapshotMetaData.newBuilder()
-                .setLastIncludedIndex(lastIncludedIndex)
-                .setLastIncludedTerm(lastIncludedTerm)
-                .setConfiguration(configuration).build();
+    public void updateMetaData(String dir, Long lastIncludedIndex, Long lastIncludedTerm,
+            RaftMessage.Configuration configuration) {
+        RaftMessage.SnapshotMetaData snapshotMetaData = RaftMessage.SnapshotMetaData.newBuilder().setLastIncludedIndex(
+                lastIncludedIndex).setLastIncludedTerm(lastIncludedTerm).setConfiguration(configuration).build();
         String snapshotMetaFile = dir + File.separator + "metadata";
         RandomAccessFile randomAccessFile = null;
         try {

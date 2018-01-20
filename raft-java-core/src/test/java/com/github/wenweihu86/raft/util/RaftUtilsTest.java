@@ -29,8 +29,7 @@ public class RaftUtilsTest {
         File segmentLog13 = new File("./data/message/example-topic/1/segment3");
         segmentLog13.createNewFile();
 
-        List<String> files = RaftFileUtils.getSortedFilesInDirectory(
-                "./data/message", "./data/message");
+        List<String> files = RaftFileUtils.getSortedFilesInDirectory("./data/message", "./data/message");
         System.out.println(files);
         Assert.assertTrue(files.size() == 4);
         Assert.assertTrue(files.contains("example-topic/0/segment0"));

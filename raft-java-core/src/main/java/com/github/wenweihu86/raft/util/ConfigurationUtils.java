@@ -20,8 +20,8 @@ public class ConfigurationUtils {
         return false;
     }
 
-    public static RaftMessage.Configuration removeServers(
-            RaftMessage.Configuration configuration, List<RaftMessage.Server> servers) {
+    public static RaftMessage.Configuration removeServers(RaftMessage.Configuration configuration,
+            List<RaftMessage.Server> servers) {
         RaftMessage.Configuration.Builder confBuilder = RaftMessage.Configuration.newBuilder();
         for (RaftMessage.Server server : configuration.getServersList()) {
             boolean toBeRemoved = false;

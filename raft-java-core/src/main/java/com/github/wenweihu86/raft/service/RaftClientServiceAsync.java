@@ -11,19 +11,15 @@ import java.util.concurrent.Future;
  */
 public interface RaftClientServiceAsync extends RaftClientService {
 
-    Future<RaftMessage.GetLeaderResponse> getLeader(
-            RaftMessage.GetLeaderRequest request,
+    Future<RaftMessage.GetLeaderResponse> getLeader(RaftMessage.GetLeaderRequest request,
             RPCCallback<RaftMessage.GetLeaderResponse> callback);
 
-    Future<RaftMessage.GetConfigurationResponse> getConfiguration(
-            RaftMessage.GetConfigurationRequest request,
+    Future<RaftMessage.GetConfigurationResponse> getConfiguration(RaftMessage.GetConfigurationRequest request,
             RPCCallback<RaftMessage.GetConfigurationResponse> callback);
 
-    Future<RaftMessage.AddPeersResponse> addPeers(
-            RaftMessage.AddPeersRequest request,
+    Future<RaftMessage.AddPeersResponse> addPeers(RaftMessage.AddPeersRequest request,
             RPCCallback<RaftMessage.AddPeersResponse> callback);
 
-    Future<RaftMessage.RemovePeersResponse> removePeers(
-            RaftMessage.RemovePeersRequest request,
+    Future<RaftMessage.RemovePeersResponse> removePeers(RaftMessage.RemovePeersRequest request,
             RPCCallback<RaftMessage.RemovePeersResponse> callback);
 }

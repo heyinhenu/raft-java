@@ -37,8 +37,7 @@ public class ExampleStateMachine implements StateMachine {
             checkpoint.createCheckpoint(snapshotDir);
         } catch (Exception ex) {
             ex.printStackTrace();
-            LOG.warn("writeSnapshot meet exception, dir={}, msg={}",
-                    snapshotDir, ex.getMessage());
+            LOG.warn("writeSnapshot meet exception, dir={}, msg={}", snapshotDir, ex.getMessage());
         }
     }
 
