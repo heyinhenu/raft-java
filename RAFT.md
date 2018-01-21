@@ -522,3 +522,8 @@ Raft 的强领导人模型简化了整个算法，但是同时也排斥了一些
 ## 参考
 
 略
+
+
+raft 算法发相关的演示：
+http://thesecretlivesofdata.com/raft/
+https://www.jianshu.com/p/4711c4c32aab

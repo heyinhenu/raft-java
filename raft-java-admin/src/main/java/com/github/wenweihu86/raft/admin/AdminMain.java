@@ -26,9 +26,7 @@ public class AdminMain {
         String cmd = args[1];
         String subCmd = args[2];
         Validate.isTrue(cmd.equals("conf"));
-        Validate.isTrue(subCmd.equals("get")
-                || subCmd.equals("add")
-                || subCmd.equals("del"));
+        Validate.isTrue(subCmd.equals("get") || subCmd.equals("add") || subCmd.equals("del"));
         RaftClientService client = new RaftClientServiceProxy(servers);
         if (subCmd.equals("get")) {
             RaftMessage.GetConfigurationRequest request = RaftMessage.GetConfigurationRequest.newBuilder().build();
@@ -45,8 +43,8 @@ public class AdminMain {
 
         } else if (subCmd.equals("add")) {
             List<RaftMessage.Server> serverList = parseServers(args[3]);
-            RaftMessage.AddPeersRequest request = RaftMessage.AddPeersRequest.newBuilder()
-                    .addAllServers(serverList).build();
+            RaftMessage.AddPeersRequest request = RaftMessage.AddPeersRequest.newBuilder().addAllServers(
+                    serverList).build();
             RaftMessage.AddPeersResponse response = client.addPeers(request);
             if (response != null) {
                 System.out.println(response.getResCode());
@@ -55,8 +53,8 @@ public class AdminMain {
             }
         } else if (subCmd.equals("del")) {
             List<RaftMessage.Server> serverList = parseServers(args[3]);
-            RaftMessage.RemovePeersRequest request = RaftMessage.RemovePeersRequest.newBuilder()
-                    .addAllServers(serverList).build();
+            RaftMessage.RemovePeersRequest request = RaftMessage.RemovePeersRequest.newBuilder().addAllServers(
+                    serverList).build();
             RaftMessage.RemovePeersResponse response = client.removePeers(request);
             if (response != null) {
                 System.out.println(response.getResCode());
@@ -72,12 +70,10 @@ public class AdminMain {
         String[] splitArray1 = serversString.split(",");
         for (String addr : splitArray1) {
             String[] splitArray2 = addr.split(":");
-            RaftMessage.EndPoint endPoint = RaftMessage.EndPoint.newBuilder()
-                    .setHost(splitArray2[0])
-                    .setPort(Integer.parseInt(splitArray2[1])).build();
-            RaftMessage.Server server = RaftMessage.Server.newBuilder()
-                    .setEndPoint(endPoint)
-                    .setServerId(Integer.parseInt(splitArray2[2])).build();
+            RaftMessage.EndPoint endPoint = RaftMessage.EndPoint.newBuilder().setHost(splitArray2[0]).setPort(
+                    Integer.parseInt(splitArray2[1])).build();
+            RaftMessage.Server server = RaftMessage.Server.newBuilder().setEndPoint(endPoint).setServerId(
+                    Integer.parseInt(splitArray2[2])).build();
             serverList.add(server);
         }
         return serverList;
